@@ -1,0 +1,43 @@
+---
+title: "FARS Functions"
+author: "Dmitri Brengauz"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{FARS Functions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Some basic functions for working with Fars data.
+
+## File Utilities
+To read a database compressed file intto a tible, use the `fars_read` function:
+```{r}
+#fars_read("/data/accident_2014.csv.bz2")
+```
+
+The two functions `make_filename` and `fars_read_years` are helper
+functions that don't do anything interesting on their
+own. `make_filename` will return a properly formatted FARS database
+file, while `fars_read_years` will return a  30,056 x 2 tibble of
+months and years for each obeservation, useful for sorting data.
+
+## Summary Utilities
+
+### `fars_summarize` 
+Return a per-month total of accidents for that year:
+
+```{r}
+#fars_summarize_years(c(2014,2015))
+```
+
+###  `fars_map_state`
+```{r}
+#fars_map_state(c(1,4,5),2014)
+```
+
+will show a plot of the accidents in Alabama, Arizona, and Arkansas in
+the year 2014.
+
+Bugs: Alaska does not work.
