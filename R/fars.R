@@ -61,3 +61,68 @@ fars_read_years <- function(years) {
         })
     })
 }
+
+##' Produce a summary of the number of accidents each month in the given years.
+##'
+##'  For each year passed into the function, create a tibble listing
+##'     the number of accidents per month for that year.
+##'
+##' Errors: An invalid year will produce an "invalid year" warning,
+##'     and result in a empty column for that year.
+##' @title FARS Summarize Years
+##' @param years Vector of either intigers or strings correspondig to
+#'     years for which the data set is available.
+##' @return A tibble of 12 rows (one per month) a column for month
+##'     number, and as many year columns as were passed to the
+##'     function.
+##' @import dplyr
+##' @import tidyr
+##' @examples
+##' fars_summarize_years(c("2014", 2015))
+##' fars_summarize_years(2015)
+##' @export
+fars_summarize_years <- function(years) {
+        dat_list <- fars_read_years(years)
+        dplyr::bind_rows(dat_list) %>% 
+                dplyr::group_by(year, MONTH) %>% 
+                dplyr::summarize(n = n()) %>%
+                tidyr::spread(year, n)
+}
+
+
+##' Map of a state with plotting all accidents for the given year.
+##'
+##' For each year and state number passed into the function, create a
+##'     map of the state showing the location accidents in that year.
+##' @title FARS State Maps
+##' @param state.num Integer corresponding to the number of the state
+##'     in the data set.
+##' @param year Either string or integer representation of the year
+##'     for which the map is to be drawn.
+##' @return NULL; side effect: plots the map of the state.
+##' @import dplyr
+##' @import maps
+##' @import graphics
+##' @export
+fars_map_state <- function(state.num, year) {
+    filename <- make_filename(year)
+    data <- fars_read(filename)
+    state.num <- as.integer(state.num)
+
+    if(!(state.num %in% unique(data$STATE)))
+        stop("invalid STATE number: ", state.num)
+    data.sub <- dplyr::filter(data, STATE == state.num)
+    if(nrow(data.sub) == 0L) {
+        message("no accidents to plot")
+        return(invisible(NULL))
+    }
+    is.na(data.sub$LONGITUD) <- data.sub$LONGITUD > 900
+    is.na(data.sub$LATITUDE) <- data.sub$LATITUDE > 90
+    with(data.sub, {
+        maps::map("state", ylim = range(LATITUDE, na.rm = TRUE),
+                  xlim = range(LONGITUD, na.rm = TRUE))
+        graphics::points(LONGITUD, LATITUDE, pch = 46)
+    })
+}
+
+
