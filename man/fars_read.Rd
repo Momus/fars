@@ -17,6 +17,3 @@ A "tbl_df" tibble object.
 Read CSV files into a tibble.  Using \code{\link[dplyr]{tbl_df}}
 read a file supported by that function.
 }
-\examples{
-\\code{\dontrun{data2015 <- fars_read("./data/accident_2015.csv.bz2")}}
-}
