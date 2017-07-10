@@ -35,3 +35,29 @@ make_filename <- function(year) {
 
 }
 
+
+##' Create a list of year tibbles.
+##'
+##' For each year passed into the function, create an tibble in a list
+##' that contains just the years and months from the dataset for those
+##' years.
+##' @title FARS Read Years
+##' @param years Vector of either intigers or strings correspondig to
+##'     years for which the data set is available.
+##' @import dplyr
+##' @return A list of FARS tibbles.
+##' @examples
+##' fars_read_years(c("2014", 2015))
+fars_read_years <- function(years) {
+    lapply(years, function(year) {
+        file <- make_filename(year)
+        tryCatch({
+            dat <- fars_read(file)
+            dplyr::mutate(dat, year = year) %>% 
+                dplyr::select(MONTH, year)
+        }, error = function(e) {
+            warning("invalid year: ", year)
+            return(NULL)
+        })
+    })
+}
