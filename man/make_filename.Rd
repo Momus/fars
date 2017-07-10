@@ -10,8 +10,15 @@ make_filename(year)
 \item{year}{A string or integer representation of a year.}
 }
 \value{
-A string matching a valid file name for the dataset.
+A string matching a valid file name for the dataset, e.g.,
+    for 2015, \code{make_filename(2015)} will return
+    "./data/accident_2015.csv.bz2"
 }
 \description{
-From the year, create a valid file name to work with FARS dataset.
+From the year, creates a valid file name to work with FARS
+dataset.
+}
+\examples{
+make_filename(2014)
+make_filename("2015")
 }

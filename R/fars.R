@@ -17,14 +17,21 @@ fars_read <- function(filename) {
         dplyr::tbl_df(data)
 }
 
-
-##' From the year, create a valid file name to work with FARS dataset.
+##' FARS make_filename
+##' 
+##' From the year, creates a valid file name to work with FARS
+##' dataset.
 ##' @param year A string or integer representation of a year.
-##' @title FARS make_filename
-##' @return A string matching a valid file name for the dataset.
+##' @return A string matching a valid file name for the dataset, e.g.,
+##'     for 2015, \code{make_filename(2015)} will return
+##'     "./data/accident_2015.csv.bz2"
 ##' @export
+##' @examples
+##' make_filename(2014)
+##' make_filename("2015")
 make_filename <- function(year) {
         year <- as.integer(year)
         sprintf("./data/accident_%d.csv.bz2", year)
 
 }
+
