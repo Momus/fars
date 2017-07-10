@@ -87,3 +87,39 @@ fars_summarize_years <- function(years) {
             dplyr::summarize(n = n()) %>%
             tidyr::spread(year, n)
 }
+
+
+##' Map of a state with plotting all accidents for the given year.
+##'
+##' For each year and state number passed into the function, create a
+##'     map of the state showing the location accidents in that year.
+##' @title FARS State Maps
+##' @param state.num Integer corresponding to the number of the state
+##'     in the data set.
+##' @param year Either string or integer representation of the year
+##'     for which the map is to be drawn.
+##' @return NULL; side effect: plots the map of the state.
+##' @import dplyr
+##' @import maps
+##' @import graphics
+##' @export
+fars_map_state <- function(state.num, year) {
+    filename <- make_filename(year)
+    data <- fars_read(filename)
+    state.num <- as.integer(state.num)
+
+    if(!(state.num %in% unique(data$STATE)))
+        stop("invalid STATE number: ", state.num)
+    data.sub <- dplyr::filter(data, STATE == state.num)
+    if(nrow(data.sub) == 0L) {
+        message("no accidents to plot")
+        return(invisible(NULL))
+    }
+    is.na(data.sub$LONGITUD) <- data.sub$LONGITUD > 900
+    is.na(data.sub$LATITUDE) <- data.sub$LATITUDE > 90
+    with(data.sub, {
+        maps::map("state", ylim = range(LATITUDE, na.rm = TRUE),
+                  xlim = range(LONGITUD, na.rm = TRUE))
+        graphics::points(LONGITUD, LATITUDE, pch = 46)
+    })
+}

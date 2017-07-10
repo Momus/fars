@@ -25,7 +25,3 @@ For each year passed into the function, create a tibble listing
 Errors: An invalid year will produce an "invalid year" warning,
     and result in a empty column for that year.
 }
-\examples{
-fars_summarize_years(c("2014", 2015))
-fars_summarize_years(2015)
-}
