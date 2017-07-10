@@ -7,8 +7,7 @@ library(dplyr)
 ##'     file.
 ##' @return A "tbl_df" tibble object.
 ##' @export
-##' @examples
-##' \code{\dontrun{data2015 <- fars_read("./data/accident_2015.csv.bz2")}}
+
 fars_read <- function(filename) {
         if(!file.exists(filename))
                 stop("file '", filename, "' does not exist")
@@ -38,8 +37,6 @@ fars_read <- function(filename) {
 #' }}
 #'
 #' @export
-#' @examples
-#' \code{make_filename(2015)}
 #' 
 make_filename <- function(year) {
         year <- as.integer(year)
