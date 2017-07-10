@@ -40,4 +40,5 @@ Return a per-month total of accidents for that year:
 will show a plot of the accidents in Alabama, Arizona, and Arkansas in
 the year 2014.
 
-Bugs: Alaska does not work.
+### Bugs
+Alaska does not work.
