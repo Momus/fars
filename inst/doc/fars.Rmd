@@ -29,7 +29,7 @@ months and years for each obeservation, useful for sorting data.
 Return a per-month total of accidents for that year:
 
 ```{r, warning=FALSE}
-fars_summarize_years(2014)
+fars_summarize_years(c(2014,2015))
 ```
 
 ###  `fars_map_state`

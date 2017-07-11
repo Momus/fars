@@ -110,22 +110,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="fars_summarize" class="section level3">
 <h3><code>fars_summarize</code></h3>
 <p>Return a per-month total of accidents for that year:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fars_summarize_years</span>(<span class="dv">2014</span>)</code></pre></div>
-<pre><code>## # A tibble: 12 × 2
-##    MONTH `2014`
-## *  &lt;int&gt;  &lt;int&gt;
-## 1      1   2168
-## 2      2   1893
-## 3      3   2245
-## 4      4   2308
-## 5      5   2596
-## 6      6   2583
-## 7      7   2696
-## 8      8   2800
-## 9      9   2618
-## 10    10   2831
-## 11    11   2714
-## 12    12   2604</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fars_summarize_years</span>(<span class="kw">c</span>(<span class="dv">2014</span>,<span class="dv">2015</span>))</code></pre></div>
+<pre><code>## # A tibble: 12 × 3
+##    MONTH `2014` `2015`
+## *  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;
+## 1      1   2168   2368
+## 2      2   1893   1968
+## 3      3   2245   2385
+## 4      4   2308   2430
+## 5      5   2596   2847
+## 6      6   2583   2765
+## 7      7   2696   2998
+## 8      8   2800   3016
+## 9      9   2618   2865
+## 10    10   2831   3019
+## 11    11   2714   2724
+## 12    12   2604   2781</code></pre>
 </div>
 <div id="fars_map_state" class="section level3">
 <h3><code>fars_map_state</code></h3>

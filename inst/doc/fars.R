@@ -2,7 +2,7 @@
 fars_read("/data/accident_2014.csv.bz2")
 
 ## ---- warning=FALSE------------------------------------------------------
-fars_summarize_years(2014)
+fars_summarize_years(c(2014,2015))
 
 ## ----warning=FALSE-------------------------------------------------------
 fars_map_state(c(1,4,5),2014)

@@ -7,7 +7,6 @@ library(dplyr)
 ##'     file.
 ##' @return A "tbl_df" tibble object.
 ##' @export
-
 fars_read <- function(filename) {
         if(!file.exists(filename))
                 stop("file '", filename, "' does not exist")
@@ -31,8 +30,8 @@ fars_read <- function(filename) {
 ##' make_filename("2015")
 make_filename <- function(year) {
         year <- as.integer(year)
-        sprintf("/data/accident_%d.csv.bz2", year)
-
+        file <- sprintf("accident_%d.csv.bz2", year)
+        system.file("extdata", file, package="fars")
 }
 
 
