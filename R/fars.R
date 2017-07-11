@@ -10,7 +10,6 @@ year = MONTH = STATE = NULL
 ##' @param filename String contianing the name and relative path to a
 ##'     file.
 ##' @return A "tbl_df" tibble object.
-##' @import readr
 ##' @import dplyr
 ##' @export
 fars_read <- function(filename) {
