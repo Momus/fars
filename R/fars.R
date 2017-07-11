@@ -22,6 +22,7 @@ fars_read <- function(filename) {
         dplyr::tbl_df(data)
 }
 
+
 ##' FARS make_filename
 ##' 
 ##' From the year, creates a valid file name to work with FARS
