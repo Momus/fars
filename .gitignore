@@ -24,4 +24,6 @@ vignettes/*.pdf
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md
-inst/doc
+#### Pre-buint docs need in repo for assignment
+#inst/doc
+#################################################

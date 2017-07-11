@@ -12,7 +12,7 @@
 
 <meta name="author" content="Dmitri Brengauz" />
 
-<meta name="date" content="2017-07-09" />
+<meta name="date" content="2017-07-10" />
 
 <title>FARS Functions</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">FARS Functions</h1>
 <h4 class="author"><em>Dmitri Brengauz</em></h4>
-<h4 class="date"><em>2017-07-09</em></h4>
+<h4 class="date"><em>2017-07-10</em></h4>
 
 
 
@@ -78,7 +78,31 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="file-utilities" class="section level2">
 <h2>File Utilities</h2>
 <p>To read a database compressed file intto a tible, use the <code>fars_read</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#fars_read(&quot;/data/accident_2014.csv.bz2&quot;)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fars_read</span>(<span class="st">&quot;/data/accident_2014.csv.bz2&quot;</span>)</code></pre></div>
+<pre><code>## # A tibble: 30,056 × 50
+##    STATE ST_CASE VE_TOTAL VE_FORMS PVH_INVL  PEDS PERNOTMVIT PERMVIT
+##    &lt;int&gt;   &lt;int&gt;    &lt;int&gt;    &lt;int&gt;    &lt;int&gt; &lt;int&gt;      &lt;int&gt;   &lt;int&gt;
+## 1      1   10001        1        1        0     0          0       2
+## 2      1   10002        1        1        0     0          0       1
+## 3      1   10003        2        2        0     0          0       7
+## 4      1   10004        3        3        0     0          0       5
+## 5      1   10005        1        1        0     0          0       1
+## 6      1   10006        1        1        0     0          0       1
+## 7      1   10007        3        2        1     0          0       2
+## 8      1   10008        2        2        0     0          0       4
+## 9      1   10009        3        3        0     0          0       5
+## 10     1   10010        2        2        0     0          0       6
+## # ... with 30,046 more rows, and 42 more variables: PERSONS &lt;int&gt;,
+## #   COUNTY &lt;int&gt;, CITY &lt;int&gt;, DAY &lt;int&gt;, MONTH &lt;int&gt;, YEAR &lt;int&gt;,
+## #   DAY_WEEK &lt;int&gt;, HOUR &lt;int&gt;, MINUTE &lt;int&gt;, NHS &lt;int&gt;, ROAD_FNC &lt;int&gt;,
+## #   ROUTE &lt;int&gt;, TWAY_ID &lt;chr&gt;, TWAY_ID2 &lt;chr&gt;, MILEPT &lt;int&gt;,
+## #   LATITUDE &lt;dbl&gt;, LONGITUD &lt;dbl&gt;, SP_JUR &lt;int&gt;, HARM_EV &lt;int&gt;,
+## #   MAN_COLL &lt;int&gt;, RELJCT1 &lt;int&gt;, RELJCT2 &lt;int&gt;, TYP_INT &lt;int&gt;,
+## #   WRK_ZONE &lt;int&gt;, REL_ROAD &lt;int&gt;, LGT_COND &lt;int&gt;, WEATHER1 &lt;int&gt;,
+## #   WEATHER2 &lt;int&gt;, WEATHER &lt;int&gt;, SCH_BUS &lt;int&gt;, RAIL &lt;chr&gt;,
+## #   NOT_HOUR &lt;int&gt;, NOT_MIN &lt;int&gt;, ARR_HOUR &lt;int&gt;, ARR_MIN &lt;int&gt;,
+## #   HOSP_HR &lt;int&gt;, HOSP_MN &lt;int&gt;, CF1 &lt;int&gt;, CF2 &lt;int&gt;, CF3 &lt;int&gt;,
+## #   FATALS &lt;int&gt;, DRUNK_DR &lt;int&gt;</code></pre>
 <p>The two functions <code>make_filename</code> and <code>fars_read_years</code> are helper functions that don’t do anything interesting on their own. <code>make_filename</code> will return a properly formatted FARS database file, while <code>fars_read_years</code> will return a 30,056 x 2 tibble of months and years for each obeservation, useful for sorting data.</p>
 </div>
 <div id="summary-utilities" class="section level2">
@@ -86,12 +110,28 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="fars_summarize" class="section level3">
 <h3><code>fars_summarize</code></h3>
 <p>Return a per-month total of accidents for that year:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#fars_summarize_years(c(2014,2015))</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fars_summarize_years</span>(<span class="dv">2014</span>)</code></pre></div>
+<pre><code>## # A tibble: 12 × 2
+##    MONTH `2014`
+## *  &lt;int&gt;  &lt;int&gt;
+## 1      1   2168
+## 2      2   1893
+## 3      3   2245
+## 4      4   2308
+## 5      5   2596
+## 6      6   2583
+## 7      7   2696
+## 8      8   2800
+## 9      9   2618
+## 10    10   2831
+## 11    11   2714
+## 12    12   2604</code></pre>
 </div>
 <div id="fars_map_state" class="section level3">
 <h3><code>fars_map_state</code></h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#fars_map_state(c(1,4,5),2014)</span></code></pre></div>
-<p>will show a plot of the accidents in Alabama, Arizona, and Arkansas in the year 2014.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fars_map_state</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">5</span>),<span class="dv">2014</span>)</code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>shows a plot of the accidents in Alabama, Arizona, and Arkansas in the year 2014.</p>
 </div>
 <div id="bugs" class="section level3">
 <h3>Bugs</h3>
