@@ -1,11 +1,17 @@
 library(dplyr)
 
+## This is necessary to get past the "no visible binding for global
+## variable" NOTE
+year = MONTH = STATE = NULL
+
 ##' Read CSV files into a tibble.  Using \code{\link[dplyr]{tbl_df}}
 ##' read a file supported by that function.
 ##' @title FARS Read Funcion
 ##' @param filename String contianing the name and relative path to a
 ##'     file.
 ##' @return A "tbl_df" tibble object.
+##' @import readr
+##' @import dplyr
 ##' @export
 fars_read <- function(filename) {
         if(!file.exists(filename))
