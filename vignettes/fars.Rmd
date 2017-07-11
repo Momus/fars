@@ -9,6 +9,14 @@ vignette: >
   \usepackage[utf8]{inputenc}     
 ---
 
+```{r, echo = FALSE, message = FALSE}
+library(fars)
+library(maps)
+library(graphics)
+```
+
+
+
 Some basic functions for working with Fars data.
 
 ## File Utilities
