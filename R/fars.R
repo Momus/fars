@@ -11,6 +11,7 @@ year = MONTH = STATE = NULL
 ##'     file.
 ##' @return A "tbl_df" tibble object.
 ##' @import dplyr
+##' @import readr
 ##' @export
 fars_read <- function(filename) {
         if(!file.exists(filename))
